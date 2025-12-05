@@ -1,5 +1,23 @@
 import { Injectable, signal } from '@angular/core';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+
+const instancia: AxiosInstance = axios.create({
+  baseURL: 'http://localhost:3000/api',
+})
+
+instancia.interceptors.request.use(
+  (config: any) => {
+    const token = localStorage.getItem('token')
+    console.log('interceptor')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +31,7 @@ export class ConectService {
     try {
       console.log("servicio axios")
       // axios.get devuelve una AxiosResponse. Los datos están en response.data.
-      const response: AxiosResponse<any> = await axios.post<any>("http://localhost:3000/api/login", { email, password });
+      const response: AxiosResponse<any> = await instancia.post<any>("/login", { email, password });
       console.log('Respuesta directa de Axios recibida.');
       return response.data;
     } catch (error) {
