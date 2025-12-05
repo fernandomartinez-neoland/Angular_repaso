@@ -1,0 +1,52 @@
+<div class="login-wrapper d-flex justify-content-center align-items-center vh-100">
+  <div class="card login-card shadow-lg border-0">
+    <div class="card-body p-4 p-md-5">
+      <h1 class="card-title text-center mb-1">Iniciar Sesión Profesional</h1>
+      <p class="card-subtitle text-center text-muted mb-4">Accede a tu plataforma.</p>
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="email" class="form-label fw-bold">Correo Electrónico</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="usuario@empresa.com"
+            class="form-control form-control-lg"
+            [(ngModel)]="email"
+            (ngModelChange)="emailChange($event)"
+            required
+          />
+
+          <div class="invalid-feedback-placeholder"></div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label fw-bold">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Mínimo 6 caracteres"
+            class="form-control form-control-lg"
+            name="password"
+            [(ngModel)]="password"
+            (ngModelChange)="passwordChange($event)"
+            required
+          />
+
+          <div class="invalid-feedback-placeholder"></div>
+        </div>
+
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-primary btn-lg custom-submit-btn">Acceder</button>
+        </div>
+
+        <div class="text-center">
+          <a href="#" class="text-decoration-none text-muted forgot-password"
+            >¿Problemas para iniciar sesión?</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
